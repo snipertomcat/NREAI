@@ -6,8 +6,8 @@
 global $wpdb;
 
 include 'lib/autoload.php';
-include 'helpers/processSettings.php';
-include 'helpers/OptionsPage.php';
+/*include 'helpers/processSettings.php';
+include 'helpers/OptionsPage.php';*/
 
 $rateSetting = new RateSetting($wpdb);
 $optionsPage = new OptionsPage();

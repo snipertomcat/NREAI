@@ -1,6 +1,7 @@
 <?php
+namespace App\Helpers;
 
-use RateSetting;
+use App\Db\RateSetting;
 
 class OptionsPage {
 

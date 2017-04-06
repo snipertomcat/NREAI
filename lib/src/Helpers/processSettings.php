@@ -1,15 +1,14 @@
 <?php
-/**
- * Created by: Jesse Griffin
+/** * Created by: Jesse Griffin
  * Date: 4/5/2017
  */
-use RateSetting;
+use App\Db\RateSetting;
 if (!function_exists('process')) {
 
     function process($irate)
     {
         global $wpdb;
-        $rateSetting = new \RateSetting($wpdb);
+        $rateSetting = new RateSetting($wpdb);
         if (isset($irate) && $irate !== '') {
             $irate = (float)($irate / 100);
             $rateSetting->set($irate);
