@@ -15,6 +15,14 @@ class NaavCalculator
     //user inputted variable on homepage - $loanAmount
     private $loanAmount;
 
+    /**
+     * NaavCalculator constructor.
+     * @param $currentApiRate
+     * @param $adminRateAdditional
+     * @param $years
+     * @param $payments
+     * @param $loanAmount
+     */
     public function __construct($currentApiRate, $adminRateAdditional, $years, $payments, $loanAmount)
     {
         $this->interestRate = $currentApiRate + $adminRateAdditional;
