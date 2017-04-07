@@ -13,4 +13,13 @@ class File
         return $line;
     }
 
+    public static function getAdminSetting($filename)
+    {
+        $fh = fopen($filename, 'r');
+        $data = fgetcsv($fh);
+        fclose($fh);
+        return $data[0];
+
+    }
+
 }

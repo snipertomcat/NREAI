@@ -13,6 +13,7 @@ if (!function_exists('process')) {
         if (isset($irate) && $irate !== '') {
             $irate = (float)($irate / 100);
             $rateSetting->set($irate);
+            $rateSetting->saveToFile($irate);
 			return true;
         }
 		return false;
