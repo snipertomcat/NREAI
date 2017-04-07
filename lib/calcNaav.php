@@ -10,7 +10,7 @@ if (!function_exists('calcNaav')) {
         $currentApiRate = include 'getDailyRates.php';
 
         //get the additional rate set in admin:
-        $filename = "/home/acuweb/public_html/nreai/" . RateSetting::getFilename();
+        $filename = '/home/acuweb/public_html/nreai/' . RateSetting::getFilename();
         $adminRateAdditional = File::getAdminSetting($filename);
 
         //setup static values:
