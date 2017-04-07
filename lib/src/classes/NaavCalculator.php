@@ -49,7 +49,7 @@ class NaavCalculator
         //echo $eqTop/$eqBottom;exit;
         $naav = $eqTop / $eqBottom;
 
-        //round result to 2 decimals for dollar amount:
-        return round($naav, 2);
+        //round result to 0 decimals for whole dollar amount:
+        return round($naav, 0);
     }
 }
