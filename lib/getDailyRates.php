@@ -1,11 +1,9 @@
 <?php
 //error_reporting(E_ALL);
-require_once 'vendor/autoload.php';
-
-use App\Api\CurlApiEngine;
-use App\IO\File;
+require_once 'autoload.php';
 
 //call api & save response to file:
 CurlApiEngine::saveRatesDaily();
 $dayRate = File::getLastLine(CurlApiEngine::getOutputFilename());
-
+$dayRate = array_reverse(explode(',', $dayRate))[0];
+return $dayRate;

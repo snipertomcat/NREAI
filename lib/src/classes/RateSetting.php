@@ -3,6 +3,8 @@
 class RateSetting
 {
 	public $wpdb;
+
+	public static $file = 'nreai_rate.txt';
 	
     public function __construct($wpdb)
     {
@@ -30,9 +32,21 @@ class RateSetting
 		//delete any previously saved record with an option_name of 'nreai_rate'
 		$this->wpdb->delete('wp_options', ['option_name' => 'nreai_rate']);
 		//insert new record:
-		$this->wpdb->insert('wp_options', ['option_id' => NULL, 'option_name' => 'nreai_rate', 'option_value' => $irate, 'autoload' => 'yes']);			
-		
+		$this->wpdb->insert('wp_options', ['option_id' => NULL, 'option_name' => 'nreai_rate', 'option_value' => $irate, 'autoload' => 'yes']);
+
         return true;
+    }
+
+	public function saveToFile($irate)
+	{
+		$fh = fopen(static::$file, 'w+');
+		fwrite($fh, $irate);
+		fclose($fh);
+	}
+
+    public static function getFilename()
+    {
+        return static::$file;
     }
 	
 	private function optionExists()
@@ -48,7 +62,7 @@ class RateSetting
 	private function getOptionId()
 	{
 		$qry = "select option_id from wp_options where option_name = 'nreai_rate'";
-		$results = $this->wpdb->get_results($qty);
+		$results = $this->wpdb->get_results($qry);
 		return $results[0]->option_id;
 	}
 }
