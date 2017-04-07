@@ -9,6 +9,9 @@ class NaavCalculator
     //$interestRate = $currentApiRate + $adminRateAdditional
     private $interestRate;
 
+    //monthly interest rate = $interestRate/12
+    private $mInterestRate;
+
     //$nthPower = #years * #payments
     private $nthPower;
 
@@ -32,7 +35,21 @@ class NaavCalculator
 
     public function calc()
     {
-        $naav = ((($this->interestRate)*($this->loanAmount)) / (1 - (1 + $this->interestRate)^-$this->nthPower));
-        return $naav;
+        //convert yearly interest rate to monthly interest rate:
+        $this->mInterestRate = $this->interestRate / 12;
+
+        $eqTop = $this->mInterestRate * $this->loanAmount;
+        //echo $eqTop . " -> eqTop <br>";
+        $eqBottomPart1 = 1 + $this->mInterestRate;
+        //echo $eqBottomPart1  . " -> eqBottomPart1 <br>";
+        $eqBottomPart2 = pow((float)$eqBottomPart1, -($this->nthPower));
+        //echo $eqBottomPart2 . " -> eqBottomPart2 <br>";
+        $eqBottom = 1 - $eqBottomPart2;
+        //echo $eqBottom . " -> eqBottom <br>";
+        //echo $eqTop/$eqBottom;exit;
+        $naav = $eqTop / $eqBottom;
+
+        //round result to 2 decimals for dollar amount:
+        return round($naav, 2);
     }
 }

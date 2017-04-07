@@ -6,4 +6,4 @@ require_once 'autoload.php';
 CurlApiEngine::saveRatesDaily();
 $dayRate = File::getLastLine(CurlApiEngine::getOutputFilename());
 $dayRate = array_reverse(explode(',', $dayRate))[0];
-return $dayRate;
+return $dayRate/100;
