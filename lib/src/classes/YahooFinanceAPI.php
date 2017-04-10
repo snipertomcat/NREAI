@@ -1,7 +1,5 @@
 <?php
 
-namespace App;
-
 class YahooFinanceAPI
 {
     public $api_url = 'http://query.yahooapis.com/v1/public/yql';
