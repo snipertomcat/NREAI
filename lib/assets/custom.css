@@ -28,25 +28,34 @@ a.uk-logo {
 
 .ticker {
     position: fixed;
-    bottom: 10px;
+    bottom: 0;
     background: #fff;
     width: 100%;
     box-shadow: 0px -10px 20px #fff;
+	margin-bottom: -20px;
 }
 
 .ticker-logo {
 	height: 125px;
-	bottom: 5px;
-	z-index:5000;
+	bottom: 0;
+	z-index:-50000;
+	float:left;
 }
 
+.ticker-table {
+	float: left;
+	line-height: .1;
+	margin-top: 10px;
+	border: 1px;
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+}
 /*Footer*/
 
 .tm-footer {
     margin-top: 0px;
     padding-top: 10px;
     padding-bottom: 10px;
-	z-index:-100;
+	z-index:-10000;
 	border:1px solid #666; 
 	bottom:0; 
 	height:140px; 
@@ -62,4 +71,4 @@ a.uk-logo {
 }
 
 /* Sticky Footer */
-#sticky_footer { line-height:150px; margin:0 auto; width:100%; text-align:center; }
+#sticky_footer { line-height:150px; margin:0 auto; width:100%; text-align:center; bottom: 0;}
