@@ -19,9 +19,26 @@ if (!function_exists('process')) {
 		return false;
     }
 }
+if (!function_exists('processUpdateInterval')) {
+    function processUpdateInterval($updateInterval)
+    {
+        global $wpdb;
+        $rateSetting = new \RateSetting($wpdb);
+        $rateSetting->setUpdateInterval($updateInterval);
+        $rateSetting->yahooSaveToFile($updateInterval);
+        return true;
+    }
+}
+
 extract($_POST);
 
-$return = process($irate);
+if (isset($irate) && $irate !== '') {
+    $return = process($irate);
+}
+
+if (isset($updateInterval) && $updateInterval !== '') {
+    $return = processUpdateInterval($updateInterval);
+}
 
 if ($return) { ?> 
 	<script>window.location.href = 'http://nreai.acuwebservices.com/wp-admin/options-general.php?page=nreai';</script>

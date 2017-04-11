@@ -19,9 +19,11 @@ class YahooFinanceAPI
         // set fields
         if ($fields===true || empty($fields)) {
             $fields = array(
-                'Symbol','Name','Change','ChangeRealtime','PERatio',
+                /*'Symbol','Name','Change','ChangeRealtime','PERatio',
                 'PERatioRealtime','Volume','PercentChange','DividendYield',
-                'LastTradeRealtimeWithTime','LastTradeWithTime','LastTradePriceOnly','LastTradeTime',
+                'LastTradeRealtimeWithTime','LastTradeWithTime',*/
+                'LastTradePriceOnly',
+                'LastTradeTime',
                 'LastTradeDate'
             );
         }
@@ -29,6 +31,7 @@ class YahooFinanceAPI
         // make request
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch,CURLOPT_USERAGENT,"Mozilla/5.0 (Linux; Android 6.0.1; MotoG3 Build/MPI24.107-55) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36");
         $resp = curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);

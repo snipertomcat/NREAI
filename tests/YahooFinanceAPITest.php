@@ -19,7 +19,9 @@ class YahooFinanceAPITest extends PHPUnit_Framework_TestCase
     {
         $yahoo = new \YahooFinanceAPI();
 
-        $result = $yahoo->api(['%5ETNX'])[0];
+        $result = $yahoo->api(['^TNX'])[0];
+
+        print_r($result);
 
         $this->assertArrayHasKey('LastTradePriceOnly', $result, 'Data returned from API is not valid');
     }
