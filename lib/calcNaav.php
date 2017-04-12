@@ -2,15 +2,25 @@
 require_once 'autoload.php';
 error_reporting(E_ALL);
 
+define( 'SHORTINIT', true );
+require_once( $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php' );
+
+
+
 if (!function_exists('calcNaav')) {
 
     function calcNaav($loanAmount)
     {
+        global $wpdb;
         //create the return array:
         $return = [];
 
-        //grab current api rate
-        $currentApiRate = include 'getDailyRates.php';
+        //grab current api rate from database:
+        /*$yahooResults = include __DIR__.'/getApiRateJob.php';
+        $currentApiRate = $yahooResults->lastTradePriceOnly / 100;*/
+        $yahooRepository = new YahooFinanceRepository($wpdb);
+        $yahooResults = $yahooRepository->getYahooRates(1);
+        $currentApiRate = $yahooResults->trade_price / 100;
 
         //get the additional rate set in admin:
         $filename = '/home/acuweb/public_html/nreai/' . RateSetting::getFilename();
