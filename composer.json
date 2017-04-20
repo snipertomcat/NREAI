@@ -1,0 +1,14 @@
+{
+    "name": "snipertomcat/nreai",
+    "description": "NAAV calculator and Wordpress plugin",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^5.0"
+    },
+    "authors": [
+        {
+            "name": "Jesse Griffin",
+            "email": "hemham914@gmail.com"
+        }
+    ]
+}
