@@ -14,7 +14,7 @@ class CurlApiEngine
      * @return bool $success
      *
      */
-    public static function saveRatesDaily()
+    public static function pullRatesCsv()
     {
 
         $curl = curl_init();
