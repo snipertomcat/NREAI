@@ -21,8 +21,6 @@ if (!function_exists('calcNaav') && !function_exists('calcNaavWeekly')) {
         $years = 10;
         $payments = 12;
 
-        $loanAmount = 200000;
-
         foreach ($currentApiRate as $idx => $rate) {
             $naav = (new NaavCalculator($rate, $adminRateAdditional, $years, $payments, $loanAmount))->calc();
             $return[$idx] = [
@@ -72,7 +70,7 @@ if (!function_exists('calcNaav') && !function_exists('calcNaavWeekly')) {
 if (isset($_POST['amount']) && $_POST['amount'] !== '') {
     $loanAmount = $_POST['amount'];
 } else {
-    $loanAmount = 0;
+    $loanAmount = 200000;
 }
 
 //return the result from calcNaav()
