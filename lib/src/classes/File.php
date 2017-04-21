@@ -22,4 +22,26 @@ class File
 
     }
 
+    public static function getLastLines($filename, $lines)
+    {
+        $data = file($filename);
+        //grab 10 last rates:
+        $start = count($data) - 10;
+        $slice = array_slice($data, $start, 10);
+        $slice = self::spotCheck($slice);
+        return array_slice($slice, 0, $lines);
+    }
+
+    private static function spotCheck($array)
+    {
+        foreach ($array as $idx => $quote) {
+            $explode = explode(',', $quote);
+            if (trim($explode[1]) == '.') {
+                unset($array[$idx]);
+            }
+        }
+
+        return $array;
+    }
+
 }

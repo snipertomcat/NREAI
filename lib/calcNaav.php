@@ -2,7 +2,38 @@
 require_once 'autoload.php';
 error_reporting(E_ALL);
 
-if (!function_exists('calcNaav')) {
+if (!function_exists('calcNaav') && !function_exists('calcNaavWeekly')) {
+
+    function calcNaavWeekly($loanAmount)
+    {
+        //grab current api rate
+        $currentApiRate = include 'getWeeklyRates.php';
+
+        //get the additional rate set in admin:
+        $filename = '/home/acuweb/public_html/nreai/' . RateSetting::getFilename();
+        $handle = fopen($filename, 'r');
+        $adminRateAdditional = fread($handle, 5);
+        fclose($handle);
+
+        //$adminRateAdditional = File::getAdminSetting($filename);
+
+        //setup static values:
+        $years = 10;
+        $payments = 12;
+
+        $loanAmount = 200000;
+
+        foreach ($currentApiRate as $idx => $rate) {
+            $naav = (new NaavCalculator($rate, $adminRateAdditional, $years, $payments, $loanAmount))->calc();
+            $return[$idx] = [
+                'naav' => $naav,
+                'cmr' => $rate * 100,
+                'amr' => $adminRateAdditional * 100
+            ];
+        }
+
+        return $return;
+    }
 
     function calcNaav($loanAmount)
     {
@@ -31,6 +62,7 @@ if (!function_exists('calcNaav')) {
         //set default values in return array:
         $return['cmr'] = $currentApiRate * 100;
         $return['amr'] = $adminRateAdditional * 100;
+        $return['weekly'] = calcNaavWeekly($loanAmount);
 
         return $return;
     }
