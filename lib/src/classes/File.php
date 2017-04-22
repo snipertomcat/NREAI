@@ -25,9 +25,9 @@ class File
     public static function getLastLines($filename, $lines)
     {
         $data = file($filename);
-        //grab 10 last rates:
-        $start = count($data) - 10;
-        $slice = array_slice($data, $start, 10);
+        //grab $x last rates:
+        $start = count($data) - $lines;
+        $slice = array_slice($data, $start, $lines);
         $slice = self::spotCheck($slice);
         return array_slice($slice, 0, $lines);
     }
