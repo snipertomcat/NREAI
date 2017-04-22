@@ -21,12 +21,27 @@ if (!function_exists('calcNaav') && !function_exists('calcNaavWeekly')) {
         $years = 10;
         $payments = 12;
 
+        $differenceArray = [];
+
+        foreach ($currentApiRate as $idx => $rate) {
+            if ($idx !== 0) { //skip 1st element
+                $yesterdayRate = $currentApiRate[$idx-1];
+                if ($rate == $yesterdayRate) {
+                    $difference = null;
+                } else {
+                    $difference = ($rate > $yesterdayRate) ? 'positive' : 'negative';
+                }
+                $differenceArray[$idx] = $difference;
+            }
+        }
+
         foreach ($currentApiRate as $idx => $rate) {
             $naav = (new NaavCalculator($rate, $adminRateAdditional, $years, $payments, $loanAmount))->calc();
             $return[$idx] = [
                 'naav' => $naav,
                 'cmr' => $rate * 100,
-                'amr' => $adminRateAdditional * 100
+                'amr' => $adminRateAdditional * 100,
+                'direction' => ($idx == 0 ? null : $differenceArray[$idx])
             ];
         }
 
