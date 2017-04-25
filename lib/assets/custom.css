@@ -115,6 +115,9 @@ a.uk-logo {
     margin-left: 50px;
     font-weight: bolder;
 }
+.naav-help .uk-close {
+    border-radius: 20px;
+}
 #info {
     margin-top: auto;
     margin-bottom: auto;
@@ -146,9 +149,13 @@ a.uk-logo {
 }
 .naav-help .uk-modal-dialog {
     top: 20%;
+    border-radius: 20px;
 }
 .naav-result.result {
     margin-left: 100px;
+}
+.what-is-nav {
+    margin-top: 10px !important;
 }
 
 /*Advertisement Slideshow*/
@@ -161,7 +168,7 @@ a.uk-logo {
 /*Ticker*/
 
 #ticker_table > div {
-    margin-left: 30px !important;
+    margin-left: 0px !important;
     height: auto !important;
 }
 .ticker {
@@ -183,11 +190,15 @@ a.uk-logo {
 }
 
 .ticker-table {
+	max-width: -moz-calc(100% - 360px);
+	max-width: -webkit-calc(100% - 360px);
+	max-width: -calc(100% - 360px);
     float: left;
     line-height: .1;
-    margin: 20px 30px 0px;
+    margin: 25px 0px 0px 30px;
     border: 1px;
     font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+	overflow: hidden;
 }
 .uk-table :not(:last-child)>td {
     border-bottom: 1px solid #0e8a44;
